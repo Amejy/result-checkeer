@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IBBU Result Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            min-height: 100vh;
+            background-image: linear-gradient(rgba(0, 50, 0, 0.7), rgba(0, 30, 0, 0.7)), url('https://images.unsplash.com/photo-1543269664-7eef42226a21?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            color: #fff;
+        }
+
+        header {
+            background: rgba(0, 80, 0, 0.9);
+            padding: 1rem 2rem;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo img {
+            height: 50px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .auth-box {
+            width: 100%;
+            max-width: 400px;
+            margin: 2rem auto;
+            padding: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #4CAF50;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        button {
+            background: #4CAF50;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+        }
+
+        .result-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .result-table th, .result-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .result-table th {
+            background: rgba(0, 100, 0, 0.5);
+        }
+
+        .profile-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .profile-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+            border: 3px solid #4CAF50;
+        }
+
+        footer {
+            background: rgba(0, 80, 0, 0.9);
+            padding: 1rem;
+            text-align: center;
+            backdrop-filter: blur(5px);
+            margin-top: auto;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .flex-group {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 1rem;
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <i class="fas fa-university"></i>
+            <h2>IBBU Result Portal</h2>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Login Section -->
+        <div class="auth-box" id="loginSection">
+            <div class="profile-header">
+                <img src="Amejy.jpg" class="profile-img" alt="Student">
+                <h2>Student Login</h2>
+            </div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <input type="text" placeholder="Matric Number" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" placeholder="Password" required>
+                </div>
+                <button type="submit">ACCESS PORTAL <i class="fas fa-arrow-right"></i></button>
+            </form>
+        </div>
+
+        <!-- Result Dashboard -->
+        <div class="auth-box" id="dashboard" style="display: none;">
+            <div class="profile-header">
+                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" class="profile-img" alt="Student">
+                <h3>mohammed haruna</h3>
+                <p>Computer Science | 2023/2024</p>
+            </div>
+
+            <div class="glass-card">
+                <div class="flex-group">
+                    <select class="full-width">
+                        <option>2023/2024</option>
+                        <option>2022/2023</option>
+                        <option>2024/2025</option>
+                    </select>
+                    <select class="full-width">
+                        <option>First Semester</option>
+                        <option>Second Semester</option>
+                    </select>
+                </div>
+                <button onclick="showResults()">GENERATE RESULTS <i class="fas fa-file-alt"></i></button>
+            </div>
+
+            <div id="resultDisplay" style="display: none;">
+                <div class="glass-card">
+                    <h3><i class="fas fa-graduation-cap"></i> Academic Transcript</h3>
+                    <table class="result-table">
+                        <tr>
+                            <th>Course Code</th>
+                            <th>Course Title</th>
+                            <th>Grade</th>
+                            <th>Units</th>
+                            <th>pcgpa</th>
+                            <th>cgpa</th>
+                        </tr>
+                        <tr>
+                            <td>CSC 101</td>
+                            <td>Introduction to Computer Science</td>
+                            <td>A</td>
+                            <td>3</td>
+                            <td>3.5</td>
+                            <td>3.7</td>
+                        </tr>
+                        <!-- Add more rows -->
+                    </table>
+                    <div class="flex-group" style="margin-top: 1rem;">
+                        <button onclick="window.print()"><i class="fas fa-print"></i> Print</button>
+                        <button onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2024 IBBU | Secure Academic Portal</p>
+    </footer>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            document.getElementById('loginSection').style.display = 'none';
+            document.getElementById('dashboard').style.display = 'block';
+        });
+
+        function showResults() {
+            document.getElementById('resultDisplay').style.display = 'block';
+        }
+
+        function logout() {
+            document.getElementById('dashboard').style.display = 'none';
+            document.getElementById('loginSection').style.display = 'block';
+            document.getElementById('resultDisplay').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
